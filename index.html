@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>nail douce | 倉敷市藤戸のネイルサロン</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Noto+Sans+JP:wght@400;500&family=Noto+Serif+JP:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --charcoal: #2c2c2c;
+      --gold:     #c9a882;
+      --off-white:#faf8f5;
+      --beige:    #e8d5c4;
+      --text:     #3a3028;
+      --sub:      #7a6b5d;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      color: var(--text);
+      background: var(--off-white);
+      line-height: 1.8;
+      font-size: 15px;
+    }
+
+    /* ── ヘッダー ── */
+    .header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 24px; height: 56px;
+      background: rgba(250,248,245,0.97);
+      border-bottom: 1px solid var(--beige);
+    }
+    .header-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem; font-weight: 400; letter-spacing: 0.14em;
+      color: var(--charcoal); text-decoration: none;
+    }
+    .header-nav { display: flex; gap: 24px; align-items: center; }
+    .header-nav a {
+      font-size: 0.78rem; letter-spacing: 0.06em;
+      color: var(--sub); text-decoration: none;
+    }
+    .header-nav a:hover { color: var(--charcoal); }
+    .btn-sm {
+      background: var(--charcoal); color: #fff;
+      padding: 7px 16px; border-radius: 2px;
+      font-size: 0.75rem; letter-spacing: 0.08em;
+      text-decoration: none; white-space: nowrap;
+    }
+    .hamburger {
+      display: none; background: none; border: none; cursor: pointer; padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 22px; height: 1.5px;
+      background: var(--charcoal); margin: 5px 0;
+    }
+
+    /* ── ドロワー ── */
+    .drawer {
+      display: none; position: fixed; top: 56px; left: 0; right: 0; bottom: 0;
+      background: var(--off-white); z-index: 99;
+      flex-direction: column; padding: 32px 24px; gap: 20px;
+    }
+    .drawer.open { display: flex; }
+    .drawer a {
+      font-size: 1rem; color: var(--text); text-decoration: none;
+      padding-bottom: 16px; border-bottom: 1px solid var(--beige);
+      letter-spacing: 0.06em;
+    }
+    .drawer .d-ig {
+      background: var(--charcoal); color: #fff !important;
+      padding: 14px; text-align: center; border-radius: 2px;
+      font-size: 0.85rem; letter-spacing: 0.1em;
+      margin-top: 8px; border-bottom: none !important;
+    }
+
+    /* ── FV ── */
+    .fv {
+      margin-top: 56px;
+      display: flex;
+      min-height: calc(100svh - 56px);
+      background-image: url('fv.jpg');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      align-items: center;
+    }
+    .fv::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(44,32,24,0.78) 0%,
+        rgba(44,32,24,0.70) 40%,
+        rgba(44,32,24,0.10) 80%
+      );
+    }
+    .fv-photo { display: none; }
+    .fv-inner {
+      position: relative; z-index: 1;
+      max-width: 500px; padding: 48px 48px 48px 64px;
+    }
+    .fv-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.72rem; letter-spacing: 0.22em;
+      color: var(--gold); margin-bottom: 16px; display: block;
+    }
+    .fv-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 300; line-height: 1.7;
+      letter-spacing: 0.06em; color: #fff;
+      margin-bottom: 16px;
+    }
+    .fv-sub {
+      font-size: 0.83rem; color: rgba(255,255,255,0.8);
+      letter-spacing: 0.08em; margin-bottom: 36px; line-height: 2;
+    }
+    .btn-reserve {
+      display: inline-block;
+      background: var(--gold); color: #fff;
+      padding: 14px 36px; border-radius: 2px;
+      font-size: 0.8rem; letter-spacing: 0.12em;
+      text-decoration: none;
+    }
+    .btn-reserve:hover { opacity: 0.85; }
+
+    /* ── セクション共通 ── */
+    .section { padding: 80px 24px; }
+    .section-inner { max-width: 800px; margin: 0 auto; }
+    .section-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.7rem; letter-spacing: 0.24em;
+      color: var(--gold); display: block; margin-bottom: 10px;
+    }
+    .section-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(1.25rem, 3vw, 1.75rem);
+      font-weight: 400; letter-spacing: 0.06em;
+      margin-bottom: 32px; color: var(--charcoal);
+    }
+    .section-alt { background: var(--beige); }
+
+    /* ── コンセプト ── */
+    .concept-body {
+      font-size: 0.93rem; line-height: 2.2;
+      color: var(--sub); max-width: 580px;
+    }
+
+    /* --- concept photo layout --- */
+    .concept-layout {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 40px; align-items: center;
+    }
+    .concept-img {
+      width: 100%; aspect-ratio: 4/3;
+      object-fit: cover; display: block;
+    }
+
+    /* --- USP card photo --- */
+    .usp-img {
+      width: 100%; display: block;
+      aspect-ratio: 4/3; object-fit: cover;
+    }
+    .usp-body { padding: 16px 20px 20px; }
+
+        /* ── お悩みセクション ── */
+    .trouble-section {
+      background: var(--charcoal);
+      padding: 72px 24px 56px;
+    }
+    .trouble-section .section-label { color: var(--gold); }
+    .trouble-section .section-title { color: #fff; margin-bottom: 40px; }
+    .trouble-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .trouble-card {
+      border: 1px solid rgba(201,168,130,0.3);
+      padding: 28px 20px 24px;
+      position: relative;
+    }
+    .trouble-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem; font-weight: 300;
+      color: var(--gold); display: block;
+      margin-bottom: 14px; letter-spacing: 0.08em;
+      line-height: 1;
+    }
+    .trouble-text {
+      font-size: 0.88rem; color: rgba(255,255,255,0.85);
+      line-height: 1.9; letter-spacing: 0.03em;
+    }
+
+    /* ── ブリッジ ── */
+    .bridge {
+      background: var(--charcoal);
+      padding: 0 24px 64px;
+      text-align: center;
+    }
+    .bridge-inner {
+      max-width: 800px; margin: 0 auto;
+      border-top: 1px solid rgba(201,168,130,0.25);
+      padding-top: 40px;
+    }
+    .bridge-text {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 0.88rem; color: var(--gold);
+      letter-spacing: 0.14em; display: block;
+      margin-bottom: 6px;
+    }
+    .bridge-sub {
+      font-size: 0.78rem; color: rgba(255,255,255,0.4);
+      letter-spacing: 0.08em;
+    }
+
+    /* ── 選ばれる理由（USP） ── */
+    .usp-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .usp-card {
+      background: var(--off-white);
+      padding: 0;
+      border-top: 2px solid var(--gold);
+      overflow: hidden;
+      position: relative;
+    }
+    .usp-ref {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.68rem; letter-spacing: 0.16em;
+      color: var(--gold); display: block;
+      margin-bottom: 10px;
+    }
+    .usp-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 1rem; font-weight: 400;
+      margin-bottom: 10px; color: var(--charcoal);
+      letter-spacing: 0.04em;
+    }
+    .usp-desc { font-size: 0.82rem; color: var(--sub); line-height: 1.9; }
+
+    /* ── メニュー ── */
+    .menu-list { display: flex; flex-direction: column; }
+    .menu-item {
+      display: flex; justify-content: space-between; align-items: baseline;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--beige);
+    }
+    .menu-name { font-size: 0.9rem; color: var(--text); }
+    .menu-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem; color: var(--gold); letter-spacing: 0.06em;
+    }
+    .menu-note {
+      font-size: 0.78rem; color: var(--sub);
+      margin-top: 20px; line-height: 2;
+    }
+
+    /* ── アクセス ── */
+    .access-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 40px; align-items: start;
+    }
+    .access-table { width: 100%; border-collapse: collapse; }
+    .access-table td {
+      padding: 11px 0;
+      border-bottom: 1px solid var(--beige);
+      font-size: 0.85rem; vertical-align: top;
+    }
+    .access-table td:first-child {
+      color: var(--sub); width: 90px; padding-right: 16px; white-space: nowrap;
+    }
+    .access-map iframe {
+      display: block; width: 100%; height: 280px; border: none; border-radius: 2px;
+    }
+
+    /* ── Instagram ── */
+    .ig-section { text-align: center; padding: 72px 24px; }
+    .ig-section .section-title { margin-bottom: 10px; }
+    .ig-desc {
+      font-size: 0.85rem; color: var(--sub);
+      margin-bottom: 28px; line-height: 2;
+    }
+    .btn-ig {
+      display: inline-block;
+      border: 1px solid var(--charcoal); color: var(--charcoal);
+      padding: 13px 40px; border-radius: 2px;
+      font-size: 0.8rem; letter-spacing: 0.12em;
+      text-decoration: none;
+    }
+    .btn-ig:hover { background: var(--charcoal); color: #fff; }
+
+    /* ── フッター ── */
+    .footer {
+      background: var(--charcoal); color: rgba(255,255,255,0.5);
+      text-align: center; padding: 32px 24px;
+      font-size: 0.75rem; letter-spacing: 0.1em;
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; color: #fff; display: block;
+      margin-bottom: 8px; letter-spacing: 0.16em;
+    }
+
+    /* ── モバイル ── */
+    @media (max-width: 599px) {
+      .header-nav { display: none; }
+      .hamburger { display: block; }
+
+      .fv {
+        background-image: none;
+        background-color: var(--charcoal);
+        flex-direction: column;
+        height: auto; min-height: 100svh;
+        justify-content: flex-start;
+        align-items: stretch;
+      }
+      .fv::before { display: none; }
+      .fv-photo {
+        display: block; width: 100%; height: 260px;
+        background-image: url('fv.jpg');
+        background-size: cover; background-position: center 30%;
+        flex-shrink: 0;
+      }
+      .fv-inner {
+        max-width: 100%; width: 100%;
+        background: var(--charcoal);
+        padding: 28px 20px 40px; text-align: center; flex: 1;
+      }
+      .btn-reserve { width: 100%; text-align: center; display: block; }
+
+      .trouble-section { padding: 48px 16px 40px; }
+      .trouble-grid { grid-template-columns: 1fr; gap: 12px; }
+      .trouble-card { padding: 20px 16px; }
+
+      .bridge { padding: 0 16px 48px; }
+
+      .concept-layout { grid-template-columns: 1fr; gap: 24px; }
+      .usp-grid { grid-template-columns: 1fr; }
+      .access-grid { grid-template-columns: 1fr; }
+      .section { padding: 48px 16px; }
+      .section-title { font-size: 1.25rem; }
+      .ig-section { padding: 48px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <a href="#top" class="header-logo">nail douce</a>
+    <nav class="header-nav">
+      <a href="#trouble">お悩み</a>
+      <a href="#why">選ばれる理由</a>
+      <a href="#menu">メニュー</a>
+      <a href="#access">アクセス</a>
+      <a href="https://www.instagram.com/f_douce.yumi/" target="_blank" rel="noopener" class="btn-sm">Instagram予約</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="メニューを開く">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <div class="drawer" id="drawer">
+    <a href="#trouble" class="drawer-link">こんなお悩みありませんか</a>
+    <a href="#why" class="drawer-link">選ばれる理由</a>
+    <a href="#menu" class="drawer-link">メニュー・料金</a>
+    <a href="#access" class="drawer-link">アクセス</a>
+    <a href="https://www.instagram.com/f_douce.yumi/" target="_blank" rel="noopener" class="drawer-link d-ig">Instagramで予約する</a>
+  </div>
+
+  <!-- FV -->
+  <section class="fv" id="top">
+    <div class="fv-photo" aria-hidden="true"></div>
+    <div class="fv-inner">
+      <span class="fv-label">Nail Salon in Fujito, Kurashiki</span>
+      <h1 class="fv-title">木曜だけの、私時間。</h1>
+      <p class="fv-sub">くすみカラーがそっと指先に寄り添う、上質なひととき。</p>
+      <a href="https://www.instagram.com/f_douce.yumi/" target="_blank" rel="noopener" class="btn-reserve">木曜を予約する</a>
+    </div>
+  </section>
+
+  <!-- コンセプト -->
+  <section class="section" id="concept">
+    <div class="section-inner">
+      <span class="section-label">CONCEPT</span>
+      <h2 class="section-title">静かな指先のアトリエ</h2>
+      <div class="concept-layout">
+        <img src="concept.jpg" alt="nail douceのサロン空間" class="concept-img">
+        <p class="concept-body">Esthetic Felicitaの一角に佇む、yumiさんだけの小さなサロン。木曜日だけ開く扉の向こうで、あなたの暮らしに似合う色をゆっくり選ぶ。そんな贅沢な時間をどうぞ。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- お悩みセクション -->
+  <section class="trouble-section" id="trouble">
+    <div class="section-inner">
+      <span class="section-label">TROUBLE</span>
+      <h2 class="section-title">こんなお悩み、ありませんか？</h2>
+      <div class="trouble-grid">
+        <div class="trouble-card">
+          <span class="trouble-num">01</span>
+          <p class="trouble-text">自分に似合うネイルカラーがわからない。大人っぽいくすみカラーを、誰かに相談しながら選びたい。</p>
+        </div>
+        <div class="trouble-card">
+          <span class="trouble-num">02</span>
+          <p class="trouble-text">混んでいるサロンでは落ち着けない。ゆっくり話しながら、プライベートな空間で施術を受けたい。</p>
+        </div>
+        <div class="trouble-card">
+          <span class="trouble-num">03</span>
+          <p class="trouble-text">週末は家族や用事で手が埋まる。平日の朝に、自分だけのための時間をつくりたい。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ブリッジ -->
+  <div class="bridge">
+    <div class="bridge-inner">
+      <span class="bridge-text">nail douceなら、すべて解決できます</span>
+      <span class="bridge-sub">3つのお悩みに、3つの答えを。</span>
+    </div>
+  </div>
+
+  <!-- 選ばれる理由 -->
+  <section class="section section-alt" id="why">
+    <div class="section-inner">
+      <span class="section-label">FEATURES</span>
+      <h2 class="section-title">nail douceが選ばれる理由</h2>
+      <div class="usp-grid">
+        <div class="usp-card">
+          <img src="trouble01.jpg" alt="くすみカラーの提案" class="usp-img">
+          <div class="usp-body">
+            <span class="usp-ref">お悩み 01 の答え</span>
+            <div class="usp-title">くすみの妙</div>
+            <div class="usp-desc">肌になじむ繊細なニュアンスカラーを、あなたの肌トーンに合わせてご提案。「これが似合う」という一色に出会えます。</div>
+          </div>
+        </div>
+        <div class="usp-card">
+          <img src="trouble02.jpg" alt="プライベートな施術空間" class="usp-img">
+          <div class="usp-body">
+            <span class="usp-ref">お悩み 02 の答え</span>
+            <div class="usp-title">プライベート空間</div>
+            <div class="usp-desc">Esthetic Felicita内の静かな一室。他のお客様を気にせず、ゆったりと施術に集中できる上質な空間です。</div>
+          </div>
+        </div>
+        <div class="usp-card">
+          <img src="trouble03.jpg" alt="木曜朝の特別時間" class="usp-img">
+          <div class="usp-body">
+            <span class="usp-ref">お悩み 03 の答え</span>
+            <div class="usp-title">木曜の特別時間</div>
+            <div class="usp-desc">9:00〜15:00の受付で、平日の朝から自分のための時間を。週に一度、指先から整える贅沢をどうぞ。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- メニュー -->
+  <section class="section" id="menu">
+    <div class="section-inner">
+      <span class="section-label">MENU</span>
+      <h2 class="section-title">メニュー・料金</h2>
+      <div class="menu-list">
+        <div class="menu-item">
+          <span class="menu-name">ハンドケアトリートメント</span>
+          <span class="menu-price">応相談</span>
+        </div>
+        <div class="menu-item">
+          <span class="menu-name">ワンカラー・グラデーション</span>
+          <span class="menu-price">応相談</span>
+        </div>
+        <div class="menu-item">
+          <span class="menu-name">フレンチ</span>
+          <span class="menu-price">応相談</span>
+        </div>
+        <div class="menu-item">
+          <span class="menu-name">アート・デザインネイル</span>
+          <span class="menu-price">応相談</span>
+        </div>
+      </div>
+      <p class="menu-note">
+        料金はデザイン・長さにより異なります。詳細はInstagramのDMにてお気軽にお問い合わせください。
+      </p>
+    </div>
+  </section>
+
+  <!-- アクセス -->
+  <section class="section section-alt" id="access">
+    <div class="section-inner">
+      <span class="section-label">ACCESS</span>
+      <h2 class="section-title">アクセス</h2>
+      <div class="access-grid">
+        <table class="access-table">
+          <tr><td>住所</td><td>岡山県倉敷市藤戸町藤戸47<br>Esthetic Felicita 内</td></tr>
+          <tr><td>営業日</td><td>木曜日のみ</td></tr>
+          <tr><td>受付時間</td><td>9:00〜15:00</td></tr>
+          <tr><td>ご予約</td><td>InstagramのDMよりお受けしています</td></tr>
+        </table>
+        <div class="access-map">
+          <iframe
+            src="https://maps.google.com/maps?q=Esthetic%20Felicita%20%E5%80%89%E6%95%B7%E5%B8%82%E8%97%A4%E6%88%B8%E7%94%BA%E8%97%A4%E6%88%B847&output=embed"
+            loading="lazy" allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Instagram -->
+  <section class="ig-section">
+    <span class="section-label" style="display:block;text-align:center;margin-bottom:10px;">INSTAGRAM</span>
+    <h2 class="section-title">作品・ご予約はInstagramで</h2>
+    <p class="ig-desc">
+      最新のネイルデザインや施術例を掲載しています。<br>
+      ご予約・お問い合わせはInstagramのDMからどうぞ。
+    </p>
+    <a href="https://www.instagram.com/f_douce.yumi/" target="_blank" rel="noopener" class="btn-ig">@f_douce.yumi を見る</a>
+  </section>
+
+  <footer class="footer">
+    <span class="footer-logo">nail douce</span>
+    <p>岡山県倉敷市藤戸町藤戸47 / Esthetic Felicita 内</p>
+    <p style="margin-top:8px">&copy; 2025 nail douce. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const hbg = document.getElementById('hamburger');
+    const drw = document.getElementById('drawer');
+    hbg.addEventListener('click', () => drw.classList.toggle('open'));
+    document.querySelectorAll('.drawer-link').forEach(a => {
+      a.addEventListener('click', () => drw.classList.remove('open'));
+    });
+  </script>
+</body>
+</html>
